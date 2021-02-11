@@ -79,7 +79,7 @@ def NSGA3(generations, cost_function, crossover_function, mutation_function,
     print('Population size is: %d\n', pop_size)
 
     for i in range (start_point,pop_size):
-        P[i].s = random_solution_function(data)
+        P[i] = random_solution_function(data)
 
     Y = []
     for i in range(len(P)):
