@@ -1,8 +1,9 @@
 import numpy as np
 
+
 def cost_f(s, data):
     X = s.X  # Add normalising over increment number
-    y = np.zeroes(0,6)
+    y = np.zeros(0, 6)
     w = get_combined_workload(X, s.c, data.w, data.c_matrix, data.d_matrix, data.p_matrix, data.alpha, data.T)
     y[0] = sum(w) / sum(data.h)
     y[1] = unbalanced_workload(w, data.h)
@@ -19,12 +20,12 @@ def average_staff_per_module(X):
     return np.count_nonzero(X) / len(X)
 
 
-def get_combined_workload(X, C, w, c_matrix, d_matrix, p_matrix, alpha, T):
+def get_combined_workload(X, C, c_matrix, d_matrix, p_matrix, alpha, T):
     return np.multiply(c_matrix, C) + np.multiply((d_matrix + np.multiply((1+alpha)*T, p_matrix)), X)
 
 
 def peak_load(X, C, h, c_matrix,d_matrix, p_matrix, t_matrix, alpha, T):
-    temp = get_combined_workload(X, C, w, c_matrix, d_matrix, p_matrix, alpha, T)
+    temp = get_combined_workload(X, C, c_matrix, d_matrix, p_matrix, alpha, T)
     return max(abs(np.divide(
         sum(np.multiply(temp, np.where(t_matrix == 1)) - np.multiply(temp, np.where(t_matrix == 2)), h))))
 
