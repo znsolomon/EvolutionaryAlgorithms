@@ -83,7 +83,7 @@ def NSGA3(generations, cost_function, crossover_function, mutation_function,
 
     Y = []
     for i in range(len(P)):
-        Y[i,:] =  cost_function(P[i].s, data)
+        Y[i,:] = cost_function(P[i], data)
 
     Pa = []
     Ya = np.array([])
